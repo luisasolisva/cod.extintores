@@ -1,57 +1,48 @@
-CREATE TABLE SalasDeComputo (
-    ID_Sala INT PRIMARY KEY,
-    Ubicacion VARCHAR(255),
-    Capacidad INT,
-    Descripcion TEXT
+CREATE TABLE salasdecomputo (
+    ID_sala INT PRIMARY KEY,
+    ubicacion VARCHAR(255),
+    capacidad INT
+    
 );
 
 
-CREATE TABLE Extintores (
-    ID_Extintor INT PRIMARY KEY,
-    ID_Sala INT,
-    ID_Tipo_Extintor INT,
-    Color VARCHAR(50),
-    Fecha_Inicio DATE,
-    Fecha_Caducidad DATE,
-    FOREIGN KEY (ID_Sala) REFERENCES SalasDeComputo(ID_Sala),
-    FOREIGN KEY (ID_Tipo_Extintor) REFERENCES TipoDeExtintor(ID_Tipo_Extintor)
+CREATE TABLE extintores (
+    ID_extintor INT PRIMARY KEY,
+    ID_sala INT,
+    ID_tipo_extintor INT,
+    color VARCHAR(50),
+    fecha_inicio DATE,
+    fecha_caducidad DATE,
+    FOREIGN KEY (ID_sala) REFERENCES salasdecomputo(ID_sala),
+    FOREIGN KEY (ID_tipo_extintor) REFERENCES tipodeextintor(ID_tipo_extintor)
 );
 
 
-CREATE TABLE TipoDeExtintor (
-    ID_Tipo_Extintor INT PRIMARY KEY,
-    Nombre_Tipo_Extintor VARCHAR(100)
+CREATE TABLE tipodeextintor (
+    ID_tipo_extintor INT PRIMARY KEY,
+    nombre_tipo_extintor VARCHAR(100)
 );
 
 
-CREATE TABLE ColorDeExtintor (
-    ID_Color_Extintor INT PRIMARY KEY,
-    Nombre_Color VARCHAR(50)
+CREATE TABLE colordeextintor (
+    ID_color_extintor INT PRIMARY KEY,
+    nombre_color VARCHAR(50)
+);
 
-CREATE TABLE UbicacionExtintor (
-    ID_Ubicacion INT PRIMARY KEY,
-    ID_Extintor INT,
-    Piso INT,
-    Seccion VARCHAR(50),
-    Numero_Serie VARCHAR(100),
-    Otros_Detalles_Ubicacion TEXT,
+
+CREATE TABLE historialmantenimiento (
+    ID_mantenimiento INT PRIMARY KEY,
+    ID_extintor INT,
+    fecha_mantenimiento DATE,
+    tipo_mantenimiento VARCHAR(100),
+    
     FOREIGN KEY (ID_Extintor) REFERENCES Extintores(ID_Extintor)
 );
 
 
-CREATE TABLE HistorialMantenimiento (
-    ID_Mantenimiento INT PRIMARY KEY,
-    ID_Extintor INT,
-    Fecha_Mantenimiento DATE,
-    Tipo_Mantenimiento VARCHAR(100),
-    Detalles_Mantenimiento TEXT,
-    FOREIGN KEY (ID_Extintor) REFERENCES Extintores(ID_Extintor)
-);
-
-
-CREATE TABLE UsuariosResponsables (
-    ID_Usuario INT PRIMARY KEY,
-    Nombre VARCHAR(100),
-    Rol VARCHAR(50),
-    Informacion_Contacto VARCHAR(255)
+CREATE TABLE usuariosresponsables (
+    ID_usuario INT PRIMARY KEY,
+    nombre VARCHAR(100),
+    rol VARCHAR(50),
+    informacion_Contacto VARCHAR(255)
 );
